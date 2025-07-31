@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -271,18 +271,18 @@ require('lazy').setup({
   -- options to `gitsigns.nvim`.
   --
   -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
+  --   { -- Adds git related signs to the gutter, as well as utilities for managing changes
+  --     'lewis6991/gitsigns.nvim',
+  --     opts = {
+  --       signs = {
+  --         add = { text = '+' },
+  --         change = { text = '~' },
+  --         delete = { text = '_' },
+  --         topdelete = { text = '‾' },
+  --         changedelete = { text = '~' },
+  --       },
+  --     },
+  --   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -310,36 +310,37 @@ require('lazy').setup({
         mappings = vim.g.have_nerd_font,
         -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
         -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
-        keys = vim.g.have_nerd_font and {} or {
-          Up = '<Up> ',
-          Down = '<Down> ',
-          Left = '<Left> ',
-          Right = '<Right> ',
-          C = '<C-…> ',
-          M = '<M-…> ',
-          D = '<D-…> ',
-          S = '<S-…> ',
-          CR = '<CR> ',
-          Esc = '<Esc> ',
-          ScrollWheelDown = '<ScrollWheelDown> ',
-          ScrollWheelUp = '<ScrollWheelUp> ',
-          NL = '<NL> ',
-          BS = '<BS> ',
-          Space = '<Space> ',
-          Tab = '<Tab> ',
-          F1 = '<F1>',
-          F2 = '<F2>',
-          F3 = '<F3>',
-          F4 = '<F4>',
-          F5 = '<F5>',
-          F6 = '<F6>',
-          F7 = '<F7>',
-          F8 = '<F8>',
-          F9 = '<F9>',
-          F10 = '<F10>',
-          F11 = '<F11>',
-          F12 = '<F12>',
-        },
+        keys = {},
+        --         keys = vim.g.have_nerd_font and {} or {
+        --           Up = '<Up> ',
+        --           Down = '<Down> ',
+        --           Left = '<Left> ',
+        --           Right = '<Right> ',
+        --           C = '<C-…> ',
+        --           M = '<M-…> ',
+        --           D = '<D-…> ',
+        --           S = '<S-…> ',
+        --           CR = '<CR> ',
+        --           Esc = '<Esc> ',
+        --           ScrollWheelDown = '<ScrollWheelDown> ',
+        --           ScrollWheelUp = '<ScrollWheelUp> ',
+        --           NL = '<NL> ',
+        --           BS = '<BS> ',
+        --           Space = '<Space> ',
+        --           Tab = '<Tab> ',
+        --           F1 = '<F1>',
+        --           F2 = '<F2>',
+        --           F3 = '<F3>',
+        --           F4 = '<F4>',
+        --           F5 = '<F5>',
+        --           F6 = '<F6>',
+        --           F7 = '<F7>',
+        --           F8 = '<F8>',
+        --           F9 = '<F9>',
+        --           F10 = '<F10>',
+        --           F11 = '<F11>',
+        --           F12 = '<F12>',
+        --         },
       },
 
       -- Document existing key chains
@@ -683,7 +684,9 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
+        ['sonarlint-language-server'] = {},
+        azure_pipelines_ls = {},
+        yamlls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -876,25 +879,33 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+  --  { -- You can easily change to a different colorscheme.
+  --    -- Change the name of the colorscheme plugin below, and then
+  --    -- change the command in the config to whatever the name of that colorscheme is.
+  --    --
+  --    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  --    'folke/tokyonight.nvim',
+  --    priority = 1000, -- Make sure to load this before all the other start plugins.
+  --    config = function()
+  --      ---@diagnostic disable-next-line: missing-fields
+  --      require('tokyonight').setup {
+  --        styles = {
+  --          comments = { italic = false }, -- Disable italics in comments
+  --        },
+  --      }
+  --
+  --      -- Load the colorscheme here.
+  --      -- Like many other themes, this one has different styles, and you could load
+  --      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+  --      vim.cmd.colorscheme 'tokyonight-night'
+  --    end,
+  --  },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
 
@@ -976,8 +987,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -994,21 +1005,22 @@ require('lazy').setup({
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
-    },
+    icons = {},
+    -- vim.g.have_nerd_font and {} or {
+    -- cmd = '⌘',
+    -- config = '🛠',
+    -- event = '📅',
+    -- ft = '📂',
+    -- init = '⚙',
+    -- keys = '🗝',
+    -- plugin = '🔌',
+    -- runtime = '💻',
+    -- require = '🌙',
+    -- source = '📄',
+    -- start = '🚀',
+    -- task = '📌',
+    -- lazy = '💤 ',
+    -- },
   },
 })
 
