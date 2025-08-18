@@ -6,7 +6,9 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        -- markdown = { 'markdownlint' },
+        yaml = { 'cfn_lint' },
+        json = { 'cfn_lint' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
